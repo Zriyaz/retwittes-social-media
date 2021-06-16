@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const server = require("http").Server(app);
+var cors = require("cors");
 const io = require("socket.io")(server);
 const next = require("next");
 const socket = require("socket.io-client/lib/socket");
@@ -26,6 +27,7 @@ const { likeOrUnlikePost } = require("./utilsServer/likeOrUnlikePost");
 
 const PORT = process.env.PORT || 3000;
 app.use(express.json()); // this is the body parser
+app.use(cors());
 connectDb();
 
 io.on("connection", (socket) => {
