@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Form, Button, Message, Divider } from "semantic-ui-react";
-import ImageDropDiv from "../Common/ImageDropDiv";
-import CommonInputs from "../Common/CommonInputs";
+import ImageDropDiv from "../common/ImageDropDiv";
+import CommonInputs from "../common/CommonInputs";
 import { uploadPic } from "../../utils/uploadPicToCloudinary";
 import { profileUpdate } from "../../utils/profileActions";
 

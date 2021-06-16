@@ -3,6 +3,7 @@ import { Form, Button, Image, Divider, Message, Icon } from "semantic-ui-react";
 import { uploadPic } from "../../utils/uploadPicToCloudinary";
 import { submitNewPost } from "../../utils/postActions";
 import CropImageModal from "./CropImageModal";
+
 const CreatePost = ({ user, setPosts }) => {
   console.log("User Post", user);
   const [newPost, setNewPost] = useState({ text: "", location: "" });

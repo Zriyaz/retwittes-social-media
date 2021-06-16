@@ -1,3 +1,6 @@
-const baseUrl ="http://localhost:3000";
+const baseUrl =
+  process.env.NODE_DEV !== "production"
+    ? "http://localhost:3000"
+    : "https://retwittes.herokuapp.com";
 
-export default baseUrl;
+module.exports = baseUrl;
