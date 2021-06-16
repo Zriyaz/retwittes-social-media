@@ -127,7 +127,8 @@ nextApp.prepare().then(() => {
   app.use("/api/chats", require("./api/chats"));
   app.all("*", (req, res) => handle(req, res));
 
-  server.listen(PORT, () => console.log(`Server is running... on ${PORT}`));
-  // if (err) throw err;
-  // console.log(`Express server running on ${PORT}`);
+  server.listen(PORT, (err) => {
+    if (err) throw err;
+    console.log("Express server running");
+  });
 });
