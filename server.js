@@ -6,7 +6,7 @@ const io = require("socket.io")(server);
 const next = require("next");
 const socket = require("socket.io-client/lib/socket");
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 require("dotenv").config({ path: "./config.env" });
 const connectDb = require("./utilsServer/connectDb");
