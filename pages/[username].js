@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import io from "socket.io-client";
 import { useRouter } from "next/router";
 import axios from "axios";
 import baseUrl from "../utils/baseUrl";
@@ -30,12 +31,13 @@ const ProfilePage = ({
 
   const [activeItem, setActiveItem] = useState("profile");
   const handleItemClick = (clickedTab) => setActiveItem(clickedTab);
-
+  const socket = useRef();
   const [loggedUserFollowStats, setUserFollowStats] =
     useState(userFollowStatus);
   const ownAccount = profile.user._id === user._id;
   const router = useRouter();
   if (errorLoading) return <div>Profile Not Found</div>;
+
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -65,6 +67,24 @@ const ProfilePage = ({
         setShowToastr(false);
       }, 3000);
   }, [showToastr]);
+
+  useEffect(() => {
+    if (!socket.current) {
+      socket.current = io(baseUrl);
+    }
+
+    if (socket.current) {
+      socket.current.emit("join", { userId: user._id });
+    }
+
+    return () => {
+      if (socket.current) {
+        socket.current.emit("disconnect");
+        socket.current.off();
+      }
+    };
+  }, []);
+
   return (
     <>
       {showToastr && <PostDeleteToastr />}
@@ -97,6 +117,7 @@ const ProfilePage = ({
                   posts.map((post) => (
                     <CardPost
                       key={post._id}
+                      socket={socket}
                       post={post}
                       user={user}
                       setPosts={setPosts}
