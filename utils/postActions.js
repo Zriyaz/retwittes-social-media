@@ -5,7 +5,14 @@ import CatchError from "./catchErrors";
 
 const Axios = axios.create({
   baseURL: `${baseUrl}/api/posts`,
-  headers: { Authorization: cookie.get("token") },
+  // headers: { Authorization: cookie.get("token") },
+});
+
+Axios.interceptors.request.use((config) => {
+  const token = cookie.get("token");
+  config.headers.Authorization = token;
+
+  return config;
 });
 
 export const submitNewPost = async (
