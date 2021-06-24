@@ -5,8 +5,15 @@ import cookie from "js-cookie";
 import Router from "next/router";
 
 const Axios = axios.create({
-  baseURL: `${baseUrl}/api/profile`,
-  headers: { Authorization: cookie.get("token") },
+  baseURL: `${baseUrl}/api/posts`,
+  // headers: { Authorization: cookie.get("token") },
+});
+
+Axios.interceptors.request.use((config) => {
+  const token = cookie.get("token");
+  config.headers.Authorization = token;
+
+  return config;
 });
 
 export const followUser = async (userToFollowId, setUserFollowStats) => {
