@@ -30,7 +30,8 @@ export const submitNewPost = async (
 
 export const deletePost = async (postId, setPosts, setShowToaster) => {
   try {
-    await Axios.delete(`${postId}`);
+    // here I've added /${postId}
+    await Axios.delete(`/${postId}`);
     setPosts((prev) => prev.filter((post) => post._id !== postId));
     setShowToaster(true);
   } catch (error) {

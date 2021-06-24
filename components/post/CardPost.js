@@ -18,7 +18,7 @@ import { deletePost, likePost } from "../../utils/postActions";
 import LikesList from "../../components/post/LikesList";
 import ImageModal from "../../components/post/ImageModal";
 import NoImageModal from "../../components/post/NoImageModal";
-const CardPost = ({ post, user, setPosts, setShowToastr, socket }) => {
+const CardPost = ({ post, user, setPosts, setShowToaster, socket }) => {
   const [likes, setLikes] = useState(post.likes);
   const [comments, setComments] = useState(post.comments);
 
